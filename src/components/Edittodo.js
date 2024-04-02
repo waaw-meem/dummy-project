@@ -1,17 +1,16 @@
 import React, {useState} from "react";
 import CreateTask from "./components/CreateTask";
-import ShowList from "./components/ShowList";
 
 function App(){
-    const [todoLists,setTodoList] = useState([])
+    const [todoList,setTodoList] = useState([])
 
     const createTodoList = (title,assign) => {
         const updateTodoList = [
-            ...todoLists,
+            ...todoList,
             {
-                id: Math.round(Math.random() * 9999),
-               title,
-               assign
+                id:Math.random() * todoList.length,
+                title,
+                assign
             }
         ]
         setTodoList(updateTodoList)
@@ -19,7 +18,7 @@ function App(){
 
     return (
         <div>
-            <ShowList todoLists={todoLists}/>
+            
             <CreateTask onCreate={createTodoList}/>
         </div>
     )
