@@ -1,27 +1,29 @@
-import React, {useState} from "react";
-import CreateTask from "./components/CreateTask";
+import React,{useState} from "react";
 
-function App(){
-    const [todoList,setTodoList] = useState([])
+function Edittodo({todoList,onSubmit}){
+    const [title,setTitle] = useState(todoList.title)
 
-    const createTodoList = (title,assign) => {
-        const updateTodoList = [
-            ...todoList,
-            {
-                id:Math.random() * todoList.length,
-                title,
-                assign
-            }
-        ]
-        setTodoList(updateTodoList)
+    const handleChange = (event) => {
+        setTitle(event.target.value)
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        onSubmit(todoList.id,title)
     }
 
     return (
-        <div>
+        <div className="book-edit">
+        <h3>Edit Todo</h3>
+        <form onSubmit={handleSubmit} >
+            <label>Add a title</label>
+            <input className="input" value={title} onChange={handleChange}/>
             
-            <CreateTask onCreate={createTodoList}/>
-        </div>
+            <button className="button">save</button>
+        </form>
+       </div>
     )
 }
 
-export default App
+export default Edittodo

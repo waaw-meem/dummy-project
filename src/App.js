@@ -1,28 +1,58 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import CreateTask from "./components/CreateTask";
 import ShowList from "./components/ShowList";
 
-function App(){
-    const [todoLists,setTodoList] = useState([])
+function App() {
+    // Declaring List of Item or project with empty array
+    const [todoLists, setTodoList] = useState([]);
 
-    const createTodoList = (title,assign) => {
-        const updateTodoList = [
+    // Create List function
+    const createTodoList = (title, assign) => {
+        const updatedTodoList = [
             ...todoLists,
             {
                 id: Math.round(Math.random() * 9999),
-               title,
-               assign
+                title,
+                assign
             }
-        ]
-        setTodoList(updateTodoList)
+        ];
+        setTodoList(updatedTodoList);
+    };
+  
+    // Edit list
+    const editTodoList = (id, newTitle, newAssign) => {
+        const updatedTodoList = todoLists.map((todoList) => {
+            if (todoList.id === id) {
+                return {
+                    ...todoList,
+                    title: newTitle,
+                    assign: newAssign
+                };
+            }
+            return todoList;
+        });
+        setTodoList(updatedTodoList);
+    };
+
+
+    const deleteTodo = (id) => {
+        const updatedTodoList = todoLists.filter((todoList) => {
+            return todoList.id !== id
+        })
+        setTodoList(updatedTodoList)
     }
+
 
     return (
         <div>
-            <ShowList todoLists={todoLists}/>
-            <CreateTask onCreate={createTodoList}/>
+            <ShowList
+                todoLists={todoLists}
+                onEdit={editTodoList}
+                onDelete={deleteTodo}
+            />
+            <CreateTask onCreate={createTodoList} />
         </div>
-    )
+    );
 }
 
-export default App
+export default App;

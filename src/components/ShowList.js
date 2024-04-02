@@ -1,10 +1,10 @@
 import React from "react";
 import ListItem from "./ListItem";
 
-function ShowList({ todoLists }) {
+function ShowList({ todoLists,onEdit,onDelete }) {
   const renderedList = todoLists.map((todoList) => {
     return <div key={todoList.id}>
-    <ListItem todoList={todoList} />
+    <ListItem todoList={todoList} onEdit={onEdit} onDelete={onDelete}/>
   </div>
   });
 

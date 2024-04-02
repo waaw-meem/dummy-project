@@ -5,8 +5,7 @@ function CreateTask({ onCreate }) {
     const [assign, setAssign] = useState([]);
 
     const handleTitleChange = (event) => {
-        setTitle(event.target.value);
-       
+        setTitle(event.target.value); 
     };
 
     const handleAssigneeChange = (event) => {
